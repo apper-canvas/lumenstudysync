@@ -47,16 +47,16 @@ const Dashboard = ({ onQuickAdd }) => {
     }
   };
 
-  const handleStatusChange = async (assignment, newStatus) => {
+const handleStatusChange = async (assignment, newStatus) => {
     try {
-      const updatedAssignment = { ...assignment, status: newStatus };
-      await assignmentService.update(assignment.Id, updatedAssignment);
-      
-      setAssignments(prev =>
-        prev.map(item => (item.Id === assignment.Id ? updatedAssignment : item))
-      );
-      
-      toast.success(`Assignment marked as ${newStatus.replace("-", " ")}`);
+      const updatedAssignment = await assignmentService.update(assignment.Id, { status: newStatus });
+      if (updatedAssignment) {
+        setAssignments(prev =>
+          prev.map(item => (item.Id === assignment.Id ? { ...assignment, status: newStatus } : item))
+        );
+        
+        toast.success(`Assignment marked as ${newStatus.replace("-", " ")}`);
+      }
     } catch (err) {
       console.error("Error updating assignment:", err);
       toast.error("Failed to update assignment status");
@@ -67,7 +67,7 @@ const Dashboard = ({ onQuickAdd }) => {
   if (error) return <Error message={error} onRetry={loadDashboardData} />;
 
   // Calculate statistics
-  const totalAssignments = assignments.length;
+const totalAssignments = assignments.length;
   const completedAssignments = assignments.filter(a => a.status === "completed").length;
   const pendingAssignments = assignments.filter(a => a.status !== "completed").length;
   const overdueAssignments = assignments.filter(a => 
@@ -176,7 +176,7 @@ const Dashboard = ({ onQuickAdd }) => {
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {todayAssignments.slice(0, 3).map((assignment) => {
+{todayAssignments.slice(0, 3).map((assignment) => {
                     const course = getCourseById(assignment.courseId);
                     return (
                       <div
@@ -227,7 +227,7 @@ const Dashboard = ({ onQuickAdd }) => {
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {upcomingAssignments.slice(0, 5).map((assignment) => {
+{upcomingAssignments.slice(0, 5).map((assignment) => {
                     const course = getCourseById(assignment.courseId);
                     const dueDate = new Date(assignment.dueDate);
                     const isUpcoming = isTomorrow(dueDate);
@@ -360,9 +360,9 @@ const Dashboard = ({ onQuickAdd }) => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {recentGrades.map((assignment) => {
+{recentGrades.map((assignment) => {
                     const course = getCourseById(assignment.courseId);
-                    const gradeColor = assignment.grade >= 90 ? "success" : 
+                    const gradeColor = assignment.grade >= 90 ? "success" :
                                     assignment.grade >= 80 ? "primary" : 
                                     assignment.grade >= 70 ? "warning" : "danger";
                     

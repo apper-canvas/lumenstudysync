@@ -28,7 +28,7 @@ const Header = ({ onMenuClick, className }) => {
           <p className="text-sm text-gray-600">Manage your studies efficiently</p>
         </div>
 
-        {/* Right side actions */}
+{/* Right side actions */}
         <div className="flex items-center space-x-3">
           <Button
             variant="ghost"
@@ -43,6 +43,17 @@ const Header = ({ onMenuClick, className }) => {
             className="p-2"
           >
             <ApperIcon name="Settings" size={20} />
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="p-2"
+            onClick={() => {
+              const { ApperUI } = window.ApperSDK;
+              ApperUI.logout();
+            }}
+          >
+            <ApperIcon name="LogOut" size={20} />
           </Button>
         </div>
       </div>

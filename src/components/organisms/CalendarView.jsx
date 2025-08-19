@@ -134,7 +134,7 @@ const CalendarView = ({ assignments = [], courses = [], onDateSelect }) => {
 
                     {/* Assignments */}
                     <div className="space-y-1">
-                      {dayAssignments.slice(0, 2).map((assignment) => {
+{dayAssignments.slice(0, 2).map((assignment) => {
                         const course = getCourseById(assignment.courseId);
                         return (
                           <div

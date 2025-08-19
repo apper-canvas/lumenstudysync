@@ -7,7 +7,7 @@ import ApperIcon from "@/components/ApperIcon";
 import { format } from "date-fns";
 
 const QuickAddModal = ({ isOpen, onClose, courses = [], onSubmit }) => {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     title: "",
     courseId: "",
     dueDate: "",
@@ -35,7 +35,7 @@ const QuickAddModal = ({ isOpen, onClose, courses = [], onSubmit }) => {
     handleClose();
   };
 
-  const handleClose = () => {
+const handleClose = () => {
     setFormData({
       title: "",
       courseId: "",

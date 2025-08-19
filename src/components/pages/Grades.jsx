@@ -49,7 +49,7 @@ const Grades = () => {
     a.grade !== null && a.grade !== undefined && a.grade !== ""
   );
 
-  const calculateCourseGrades = () => {
+const calculateCourseGrades = () => {
     return courses.map(course => {
       const courseAssignments = gradedAssignments.filter(a => 
         a.courseId.toString() === course.Id.toString()
@@ -299,7 +299,7 @@ const Grades = () => {
                 <div className="space-y-3">
                   {gradedAssignments
                     .sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate))
-                    .slice(0, 5)
+.slice(0, 5)
                     .map((assignment) => {
                       const course = getCourseById(assignment.courseId);
                       return (

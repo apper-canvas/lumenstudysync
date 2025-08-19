@@ -41,16 +41,16 @@ const Assignments = ({ onQuickAdd }) => {
     }
   };
 
-  const handleStatusChange = async (assignment, newStatus) => {
+const handleStatusChange = async (assignment, newStatus) => {
     try {
-      const updatedAssignment = { ...assignment, status: newStatus };
-      await assignmentService.update(assignment.Id, updatedAssignment);
-      
-      setAssignments(prev =>
-        prev.map(item => (item.Id === assignment.Id ? updatedAssignment : item))
-      );
-      
-      toast.success(`Assignment marked as ${newStatus.replace("-", " ")}`);
+      const updatedAssignment = await assignmentService.update(assignment.Id, { status: newStatus });
+      if (updatedAssignment) {
+        setAssignments(prev =>
+          prev.map(item => (item.Id === assignment.Id ? { ...assignment, status: newStatus } : item))
+        );
+        
+        toast.success(`Assignment marked as ${newStatus.replace("-", " ")}`);
+      }
     } catch (err) {
       console.error("Error updating assignment:", err);
       toast.error("Failed to update assignment status");
@@ -141,7 +141,7 @@ const Assignments = ({ onQuickAdd }) => {
         />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {assignments.map((assignment) => {
+{assignments.map((assignment) => {
             const course = getCourseById(assignment.courseId);
             return (
               <AssignmentCard

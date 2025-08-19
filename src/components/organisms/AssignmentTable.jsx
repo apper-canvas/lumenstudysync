@@ -28,7 +28,7 @@ const AssignmentTable = ({
   };
 
   // Filter and sort assignments
-  const filteredAssignments = assignments
+const filteredAssignments = assignments
     .filter((assignment) => {
       const matchesSearch = assignment.title.toLowerCase().includes(search.toLowerCase());
       const matchesStatus = filterStatus === "all" || assignment.status === filterStatus;
@@ -52,7 +52,7 @@ const AssignmentTable = ({
           aValue = priorityOrder[a.priority] || 1;
           bValue = priorityOrder[b.priority] || 1;
           break;
-        case "course":
+case "course":
           const aCourse = getCourseById(a.courseId);
           const bCourse = getCourseById(b.courseId);
           aValue = aCourse?.name?.toLowerCase() || "";
@@ -201,7 +201,7 @@ const AssignmentTable = ({
                 </tr>
               </thead>
               <tbody>
-                {filteredAssignments.map((assignment) => {
+{filteredAssignments.map((assignment) => {
                   const course = getCourseById(assignment.courseId);
                   const status = statusConfig[assignment.status] || statusConfig["not-started"];
                   
