@@ -11,6 +11,7 @@ import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
 import ApperIcon from "@/components/ApperIcon";
+import StudyTimerWidget from "@/components/organisms/StudyTimerWidget";
 import { courseService } from "@/services/api/courseService";
 import { assignmentService } from "@/services/api/assignmentService";
 import { toast } from "react-toastify";
@@ -303,7 +304,7 @@ const Dashboard = ({ onQuickAdd }) => {
             </CardContent>
           </Card>
 
-          {/* Quick Actions */}
+{/* Quick Actions */}
           <Card>
             <CardHeader>
               <CardTitle>Quick Actions</CardTitle>
@@ -335,6 +336,9 @@ const Dashboard = ({ onQuickAdd }) => {
               </Button>
             </CardContent>
           </Card>
+
+          {/* Study Timer */}
+          <StudyTimerWidget />
 
           {/* Recent Grades */}
           {recentGrades.length > 0 && (

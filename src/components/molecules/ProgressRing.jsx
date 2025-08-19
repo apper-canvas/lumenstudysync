@@ -6,6 +6,8 @@ const ProgressRing = ({
   size = 80, 
   strokeWidth = 8, 
   color = "primary",
+  showTime = false,
+  timeText = "",
   className 
 }) => {
   const radius = (size - strokeWidth) / 2;
@@ -23,41 +25,42 @@ const ProgressRing = ({
   };
 
   return (
-    <div className={cn("relative", className)} style={{ width: size, height: size }}>
-      <svg
-        className="transform -rotate-90"
-        width={size}
-        height={size}
-      >
+    <div
+    className={cn("relative", className)}
+    style={{
+        width: size,
+        height: size
+    }}>
+    <svg className="transform -rotate-90" width={size} height={size}>
         {/* Background circle */}
         <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          stroke="currentColor"
-          strokeWidth={strokeWidth}
-          fill="transparent"
-          className="text-gray-200"
-        />
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke="currentColor"
+            strokeWidth={strokeWidth}
+            fill="transparent"
+            className="text-gray-200" />
         {/* Progress circle */}
         <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          stroke="currentColor"
-          strokeWidth={strokeWidth}
-          fill="transparent"
-          strokeDasharray={strokeDasharray}
-          strokeDashoffset={strokeDashoffset}
-          strokeLinecap="round"
-          className={cn("transition-all duration-500 ease-out", colorClasses[color])}
-        />
-      </svg>
-      {/* Progress text */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-sm font-semibold text-gray-700">{Math.round(progress)}%</span>
-      </div>
-    </div>
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke="currentColor"
+            strokeWidth={strokeWidth}
+            fill="transparent"
+            strokeDasharray={strokeDasharray}
+            strokeDashoffset={strokeDashoffset}
+            strokeLinecap="round"
+            className={cn("transition-all duration-500 ease-out", colorClasses[color])} />
+    </svg>
+    {/* Progress text */}
+    {/* Progress text */}
+    <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-sm font-semibold text-gray-700">
+            {showTime ? timeText : `${Math.round(progress)}%`}
+        </span>
+    </div></div>
   );
 };
 
